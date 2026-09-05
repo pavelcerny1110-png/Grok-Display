@@ -1,0 +1,2 @@
+Write-access test from Grok connector.
+If you see this file, write permissions are working.
