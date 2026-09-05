@@ -408,7 +408,8 @@
     }
     .operational-alert.alert-alarm-toggle {
       cursor: pointer;
-      touch-action: manipulation;
+      /* pan-y: svislý scroll stránky; vodorovný swipe musí dostat JS (ne manipulation). */
+      touch-action: pan-y pinch-zoom;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
       transform: scale(1);
@@ -1105,6 +1106,7 @@
     }
     body.light .manual-gesture-card:focus-visible { outline-color: rgba(25, 28, 33, 0.90); }
     .manual-gesture-target {
+      touch-action: pan-y pinch-zoom;
       will-change: transform, opacity;
       transform-origin: center center;
     }
@@ -2274,6 +2276,7 @@
       const id = String(item.id || '');
       const wrapper = document.createElement('section');
       wrapper.className = 'operational-entry';
+      if (id) wrapper.dataset.itemId = id;
       const parentId = context && id ? context.parentByChildId.get(id) : '';
       const parentOrder = parentId && context ? context.orderById.get(parentId) : null;
       const promotedReminder = canonicalType(item.type) === 'reminder' && isRingingReminder(item, context) && Boolean(parentOrder);
